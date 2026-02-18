@@ -3,37 +3,121 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Futify App - iOS 26 Glass UI</title>
+<title>Futify App - Pro iOS 26</title>
 <style>
-/* --- CSS STYLES --- */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    -webkit-tap-highlight-color: transparent;
-}
+/* --- FULL PROFESSIONAL CSS --- */
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, sans-serif; -webkit-tap-highlight-color: transparent; }
+body { background: #0f0c29; color: #fff; height: 100vh; overflow: hidden; }
 
-body {
-    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-    color: #ffffff;
-    height: 100vh;
-    overflow: hidden;
-}
+.app-container { max-width: 450px; margin: 0 auto; height: 100%; position: relative; overflow: hidden; background: #16162d; }
 
-.app-container {
-    max-width: 450px;
-    margin: 0 auto;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    background: rgba(255, 255, 255, 0.02);
-    overflow: hidden;
-}
+/* GLASS UI ELEMENTS */
+.glass-header { padding: 15px; background: rgba(255,255,255,0.05); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.1); }
+.glass-card { background: rgba(255,255,255,0.07); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; overflow: hidden; }
 
-/* --- iOS 26 LIQUID GLASS UTILITIES --- */
-.glass-morph {
+/* SEARCH BAR */
+.search-bar { display: flex; align-items: center; padding: 10px 15px; background: rgba(0,0,0,0.3); border-radius: 12px; border: 1px solid rgba(255,255,255,0.2); margin-top: 10px; text-decoration: none; color: #ccc; }
+
+/* NAVIGATION PAGES */
+.page { display: none; height: 100%; flex-direction: column; overflow-y: auto; padding-bottom: 100px; }
+.active-page { display: flex; }
+
+/* CATEGORY HIGHLIGHTS */
+.cat-nav { display: flex; gap: 20px; overflow-x: auto; padding: 20px; scrollbar-width: none; }
+.cat-item { min-width: 60px; text-align: center; text-decoration: none; color: #fff; }
+.cat-icon { width: 55px; height: 55px; background: linear-gradient(45deg, #4facfe, #00f2fe); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 25px; margin-bottom: 5px; box-shadow: 0 5px 15px rgba(0,242,254,0.3); }
+
+/* PRODUCT DETAIL OVERLAY */
+#product-view { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: #0f0c29; z-index: 1000; display: none; overflow-y: auto; padding-bottom: 80px; }
+.detail-img { width: 100%; height: 350px; object-fit: cover; }
+.detail-info { padding: 20px; }
+.price-tag { font-size: 28px; color: #00f2fe; font-weight: bold; margin: 10px 0; }
+.action-footer { position: fixed; bottom: 0; width: 100%; max-width: 450px; display: flex; height: 70px; background: #1e1e2e; }
+.btn-cart { flex: 1; background: #fff; color: #000; border: none; font-weight: bold; font-size: 16px; }
+.btn-buy { flex: 1; background: #ff9f00; color: #fff; border: none; font-weight: bold; font-size: 16px; }
+
+/* BOTTOM NAV */
+.bottom-nav { position: fixed; bottom: 0; width: 100%; max-width: 450px; display: flex; justify-content: space-around; padding: 15px; background: rgba(20,20,40,0.95); backdrop-filter: blur(20px); border-top: 1px solid rgba(255,255,255,0.1); }
+.nav-btn { text-decoration: none; color: #888; text-align: center; font-size: 12px; }
+.nav-btn.active { color: #00f2fe; }
+.nav-icon { font-size: 22px; display: block; }
+</style>
+</head>
+<body>
+
+<div class="app-container">
+    <div id="home" class="page active-page">
+        <header class="glass-header">
+            <h2 style="color:#00f2fe; font-style: italic;">Futify</h2>
+            <a href="Search.html" class="search-bar">🔍 Search for products...</a>
+        </header>
+
+        <div class="cat-nav">
+            <a href="Search.html" class="cat-item"><div class="cat-icon">👕</div><span>Fashion</span></a>
+            <a href="Search.html" class="cat-item"><div class="cat-icon">📱</div><span>Mobiles</span></a>
+            <a href="Search.html" class="cat-item"><div class="cat-icon">💄</div><span>Beauty</span></a>
+            <a href="Search.html" class="cat-item"><div class="cat-icon">💻</div><span>Electronics</span></a>
+        </div>
+
+        <div style="padding: 15px; display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+            <div class="glass-card" onclick="openProduct('Futify Watch Pro', '₹2,999', 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500')">
+                <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500" style="width:100%">
+                <div style="padding:10px;"><h4>Watch Pro</h4><p style="color:#00f2fe">₹2,999</p></div>
+            </div>
+            <div class="glass-card" onclick="openProduct('Premium Laptop', '₹54,999', 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=500')">
+                <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=500" style="width:100%">
+                <div style="padding:10px;"><h4>Laptop Core i7</h4><p style="color:#00f2fe">₹54,999</p></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="product-view">
+        <div style="padding: 15px; position: absolute; top: 0; z-index: 10;">
+            <button onclick="closeProduct()" style="background:rgba(0,0,0,0.5); color:white; border:none; padding:10px; border-radius:50%; font-size:20px;">⬅</button>
+        </div>
+        <img id="p-img" class="detail-img">
+        <div class="detail-info">
+            <h1 id="p-title">Product Name</h1>
+            <p style="color: #00d4ff; background: rgba(0,212,255,0.1); display: inline-block; padding: 5px 10px; border-radius: 5px; margin-top: 10px;">Special Price</p>
+            <div id="p-price" class="price-tag">₹0</div>
+            <p style="color: #aaa; line-height: 1.5;">Experience high-quality performance and premium glass design. Includes 1-year warranty and free delivery.</p>
+            
+            <div style="margin-top: 20px; border-top: 1px solid #333; padding-top: 20px;">
+                <h3>User Reviews</h3>
+                <p>⭐⭐⭐⭐⭐ - Best product from Futify!</p>
+                <p>⭐⭐⭐⭐ - Really liked the glass finish.</p>
+            </div>
+        </div>
+        <div class="action-footer">
+            <button class="btn-cart">Add to Cart</button>
+            <button class="btn-buy">Buy Now</button>
+        </div>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-btn active"><span class="nav-icon">🏠</span>Home</a>
+        <a href="Search.html" class="nav-btn"><span class="nav-icon">▶️</span>Play</a>
+        <a href="Search.html" class="nav-btn"><span class="nav-icon">✨</span>Deals</a>
+        <a href="account.html" class="nav-btn"><span class="nav-icon">👤</span>Account</a>
+        <a href="Cart.html" class="nav-btn"><span class="nav-icon">🛒</span>Cart</a>
+    </nav>
+</div>
+
+<script>
+    function openProduct(title, price, img) {
+        document.getElementById('p-title').innerText = title;
+        document.getElementById('p-price').innerText = price;
+        document.getElementById('p-img').src = img;
+        document.getElementById('product-view').style.display = 'block';
+    }
+
+    function closeProduct() {
+        document.getElementById('product-view').style.display = 'none';
+    }
+</script>
+
+</body>
+</html>
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(25px) saturate(150%);
     -webkit-backdrop-filter: blur(25px) saturate(150%);
